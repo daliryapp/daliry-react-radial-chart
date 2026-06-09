@@ -1,10 +1,10 @@
 {
   "name": "daliry-react-radial-chart",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "packageManager": "yarn@4.10.3",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "dist/MobileDatePicker.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "node build.js && tsc"
   },
