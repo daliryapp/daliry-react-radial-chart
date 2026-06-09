@@ -12,6 +12,10 @@ type StatusGaugeCardProps = {
     animationDuration?: number;
     scale?: number;
     textColor?: string;
+    startAngle?: number;
+    endAngle?: number;
+    gradientColors?: [string, string];
 };
-export default function RadialChart({ value, maxValue, label, okColor, dangerColor, trackColor, cardBg, width, height, animationDuration, scale, textColor, }: StatusGaugeCardProps): React.JSX.Element;
+export default function DaliryReactRadialChart({ value, maxValue, label, okColor, dangerColor, trackColor, cardBg, width, height, animationDuration, scale, textColor, }: StatusGaugeCardProps): React.JSX.Element;
 export {};
+//# sourceMappingURL=index.d.ts.map

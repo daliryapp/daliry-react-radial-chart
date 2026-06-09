@@ -13,6 +13,9 @@ type StatusGaugeCardProps = {
     animationDuration?: number;
     scale?: number;
     textColor?: string;
+    startAngle?: number;
+    endAngle?: number;
+    gradientColors?: [string, string];
 };
 
 function polarToCartesian(cx: number, cy: number, r: number, angle: number): { x: number; y: number } {
@@ -42,7 +45,7 @@ function formatValue(value: number): string {
     return `${value.toFixed(1)}%`;
 }
 
-export default function RadialChart({
+export default function DaliryReactRadialChart({
                                         value = 0,
                                         maxValue,
                                         label = "success",
