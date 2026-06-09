@@ -1,4 +1,5 @@
 import React from "react";
+type GradientColors = [string, string];
 type StatusGaugeCardProps = {
     value?: number;
     maxValue?: number;
@@ -12,10 +13,11 @@ type StatusGaugeCardProps = {
     animationDuration?: number;
     scale?: number;
     textColor?: string;
-    startAngle?: number;
-    endAngle?: number;
-    gradientColors?: [string, string];
+    gradientColors?: GradientColors;
+    dangerGradientColors?: GradientColors;
+    trackGradientColors?: GradientColors;
+    gradientDirection?: "horizontal" | "vertical" | "diagonal";
 };
-export default function DaliryReactRadialChart({ value, maxValue, label, okColor, dangerColor, trackColor, cardBg, width, height, animationDuration, scale, textColor, }: StatusGaugeCardProps): React.JSX.Element;
+export default function DaliryReactRadialChart({ value, maxValue, label, okColor, dangerColor, trackColor, cardBg, width, height, animationDuration, scale, textColor, gradientColors, dangerGradientColors, trackGradientColors, gradientDirection, }: StatusGaugeCardProps): React.JSX.Element;
 export {};
 //# sourceMappingURL=index.d.ts.map
