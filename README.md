@@ -3,15 +3,22 @@
 **React Status Gauge** is a lightweight and fully customizable **semicircle gauge component** for **React** built with **SVG**.  
 It is perfect for **dashboards**, **KPI cards**, **status indicators**, and any React project that needs a clean and animated gauge UI.
 
-
 <p>
   <img
     src="https://github.com/daliryapp/daliry-react-radial-chart/blob/master/src/assets/images/daliry-radial-chart.png?raw=true"
     alt="Daliry React Radial Chart Screenshot"
     width="350"
   />
-
 </p>
+
+---
+
+## 💖 Support
+
+If you were thinking about donating, the best way to support me for now is to **follow me on GitHub** and **star this project**.  
+It really helps me keep building and improving open-source components.
+
+👉 **Call to action:** [Follow me on GitHub](https://github.com/daliryapp)
 
 ---
 
@@ -56,7 +63,6 @@ yarn add daliry-react-radial-chart
 tsx
 import DaliryReactRadialChart from "daliry-react-radial-chart";
 
-tsx
 <DaliryReactRadialChart
   value={26.2}
   maxValue={30}
