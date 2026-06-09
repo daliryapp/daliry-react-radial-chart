@@ -10,6 +10,7 @@ It is perfect for **dashboards**, **KPI cards**, **status indicators**, and any 
     alt="Daliry React Radial Chart Screenshot"
     width="250"
   />
+
 </p>
 
 ---
