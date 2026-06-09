@@ -18,7 +18,7 @@ It is perfect for **dashboards**, **KPI cards**, **status indicators**, and any 
 If you were thinking about donating, the best way to support me for now is to **follow me on GitHub** and **star this project**.  
 It really helps me keep building and improving open-source components.
 
-👉 **Call to action:** [Follow me on GitHub](https://github.com/daliryapp)
+👉 [Follow me on GitHub](https://github.com/daliryapp)
 
 ---
 
@@ -68,48 +68,6 @@ import DaliryReactRadialChart from "daliry-react-radial-chart";
   maxValue={30}
   label="sentToPSP"
 />
-
----
-
-## ⚙️ Example
-
-tsx
-import React, { useState } from "react";
-import DaliryReactRadialChart from "daliry-react-radial-chart";
-
-export default function Demo() {
-  const [value, setValue] = useState(26.2);
-
-  return (
-<div
-style={{
-minHeight: "100vh",
-background: "#171B21",
-padding: 24,
-}}
->
-<div style={{ marginBottom: 20 }}>
-<button onClick={() => setValue(18)}>18</button>
-<button onClick={() => setValue(30)} style={{ marginLeft: 8 }}>
-30
-</button>
-<button onClick={() => setValue(42)} style={{ marginLeft: 8 }}>
-42
-</button>
-<button onClick={() => setValue(72.1)} style={{ marginLeft: 8 }}>
-72.1
-</button>
-</div>
-
-<DaliryReactRadialChart
-value={value}
-maxValue={30}
-label="sentToPSP"
-/>
-</div>
-  );
-}
-
 ---
 
 ## 🎛 Props
