@@ -5,9 +5,9 @@ It is perfect for **dashboards**, **KPI cards**, **status indicators**, and any 
 
 <p>
   <img
-    src="https://github.com/daliryapp/daliry-react-radial-chart/blob/master/src/assets/images/daliry-radial-chart.png?raw=true"
+    src="https://raw.githubusercontent.com/daliryapp/daliry-react-radial-chart/refs/heads/master/src/assets/images/new-features.png"
     alt="Daliry React Radial Chart Screenshot"
-    width="350"
+    width="380"
   />
 </p>
 
