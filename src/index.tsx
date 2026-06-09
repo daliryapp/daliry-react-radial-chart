@@ -1,4 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState, useId } from "react";
+
+type GradientColors = [string, string];
 
 type StatusGaugeCardProps = {
     value?: number;
@@ -13,9 +15,10 @@ type StatusGaugeCardProps = {
     animationDuration?: number;
     scale?: number;
     textColor?: string;
-    startAngle?: number;
-    endAngle?: number;
-    gradientColors?: [string, string];
+    gradientColors?: GradientColors;
+    dangerGradientColors?: GradientColors;
+    trackGradientColors?: GradientColors;
+    gradientDirection?: "horizontal" | "vertical" | "diagonal";
 };
 
 function polarToCartesian(cx: number, cy: number, r: number, angle: number): { x: number; y: number } {
@@ -26,12 +29,23 @@ function polarToCartesian(cx: number, cy: number, r: number, angle: number): { x
     };
 }
 
-function describeArc(cx: number, cy: number, r: number, startAngle: number, endAngle: number): string {
-    const start = polarToCartesian(cx, cy, r, endAngle);
-    const end = polarToCartesian(cx, cy, r, startAngle);
-    const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+function describeArc(
+    cx: number,
+    cy: number,
+    r: number,
+    startAngle: number,
+    endAngle: number
+): string {
+    const delta = endAngle - startAngle;
 
-    return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArcFlag} 0 ${end.x} ${end.y}`;
+    const sweepFlag = delta >= 0 ? 1 : 0;
+    const absDelta = Math.abs(delta);
+    const largeArcFlag = absDelta > 180 ? 1 : 0;
+
+    const start = polarToCartesian(cx, cy, r, startAngle);
+    const end = polarToCartesian(cx, cy, r, endAngle);
+
+    return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArcFlag} ${sweepFlag} ${end.x} ${end.y}`;
 }
 
 function clamp(value: number, min: number, max: number): number {
@@ -43,6 +57,18 @@ function formatValue(value: number): string {
     if (Number.isInteger(value)) return `${value}%`;
     if (value < 10) return `${value.toFixed(2)}%`;
     return `${value.toFixed(1)}%`;
+}
+
+function getGradientCoords(direction: "horizontal" | "vertical" | "diagonal") {
+    switch (direction) {
+        case "vertical":
+            return { x1: "0%", y1: "0%", x2: "0%", y2: "100%" };
+        case "diagonal":
+            return { x1: "0%", y1: "0%", x2: "100%", y2: "100%" };
+        case "horizontal":
+        default:
+            return { x1: "0%", y1: "0%", x2: "100%", y2: "0%" };
+    }
 }
 
 export default function DaliryReactRadialChart({
@@ -58,7 +84,16 @@ export default function DaliryReactRadialChart({
                                         animationDuration = 700,
                                         scale = 1,
                                         textColor = "#D8DCE3",
+                                        gradientColors,
+                                        dangerGradientColors,
+                                        trackGradientColors,
+                                        gradientDirection = "horizontal",
                                     }: StatusGaugeCardProps) {
+    const gradientBaseId = useId().replace(/:/g, "");
+    const valueGradientId = `${gradientBaseId}-value-gradient`;
+    const dangerGradientId = `${gradientBaseId}-danger-gradient`;
+    const trackGradientId = `${gradientBaseId}-track-gradient`;
+
     const [animatedValue, setAnimatedValue] = useState<number>(clamp(value, 0, 100));
     const rafRef = useRef<number | null>(null);
 
@@ -149,6 +184,24 @@ export default function DaliryReactRadialChart({
         return describeArc(cx, cy, outerRadius, maxEndAngle as number, endAngle);
     }, [cx, cy, outerRadius, safeMaxValue, maxEndAngle]);
 
+    const trackGradientCoords = getGradientCoords(gradientDirection);
+
+    const valueStroke = gradientColors
+        ? `url(#${valueGradientId})`
+        : valueColor;
+
+    const trackStroke = trackGradientColors
+        ? `url(#${trackGradientId})`
+        : trackColor;
+
+    const outerOkStroke = gradientColors
+        ? `url(#${valueGradientId})`
+        : okColor;
+
+    const outerDangerStroke = dangerGradientColors
+        ? `url(#${dangerGradientId})`
+        : dangerColor;
+
     return (
         <div
             style={{
@@ -170,11 +223,52 @@ export default function DaliryReactRadialChart({
                 viewBox={`0 0 ${svgWidth} ${svgHeight}`}
                 fill="none"
             >
+                <defs>
+                    {gradientColors && (
+                        <linearGradient
+                            id={valueGradientId}
+                            x1={trackGradientCoords.x1}
+                            y1={trackGradientCoords.y1}
+                            x2={trackGradientCoords.x2}
+                            y2={trackGradientCoords.y2}
+                        >
+                            <stop offset="0%" stopColor={gradientColors[0]} />
+                            <stop offset="100%" stopColor={gradientColors[1]} />
+                        </linearGradient>
+                    )}
+
+                    {dangerGradientColors && (
+                        <linearGradient
+                            id={dangerGradientId}
+                            x1={trackGradientCoords.x1}
+                            y1={trackGradientCoords.y1}
+                            x2={trackGradientCoords.x2}
+                            y2={trackGradientCoords.y2}
+                        >
+                            <stop offset="0%" stopColor={dangerGradientColors[0]} />
+                            <stop offset="100%" stopColor={dangerGradientColors[1]} />
+                        </linearGradient>
+                    )}
+
+                    {trackGradientColors && (
+                        <linearGradient
+                            id={trackGradientId}
+                            x1={trackGradientCoords.x1}
+                            y1={trackGradientCoords.y1}
+                            x2={trackGradientCoords.x2}
+                            y2={trackGradientCoords.y2}
+                        >
+                            <stop offset="0%" stopColor={trackGradientColors[0]} />
+                            <stop offset="100%" stopColor={trackGradientColors[1]} />
+                        </linearGradient>
+                    )}
+                </defs>
+
                 {safeMaxValue !== null && (
                     <>
                         <path
                             d={describeArc(cx, cy, outerRadius, startAngle, endAngle)}
-                            stroke={trackColor}
+                            stroke={trackStroke}
                             strokeWidth={outerStrokeWidth}
                             strokeLinecap="butt"
                             opacity="0.35"
@@ -183,7 +277,7 @@ export default function DaliryReactRadialChart({
                         {outerOkPath && (
                             <path
                                 d={outerOkPath}
-                                stroke={okColor}
+                                stroke={outerOkStroke}
                                 strokeWidth={outerStrokeWidth}
                                 strokeLinecap="butt"
                             />
@@ -192,7 +286,7 @@ export default function DaliryReactRadialChart({
                         {outerDangerPath && (
                             <path
                                 d={outerDangerPath}
-                                stroke={dangerColor}
+                                stroke={outerDangerStroke}
                                 strokeWidth={outerStrokeWidth}
                                 strokeLinecap="butt"
                             />
@@ -202,7 +296,7 @@ export default function DaliryReactRadialChart({
 
                 <path
                     d={innerTrackPath}
-                    stroke={trackColor}
+                    stroke={trackStroke}
                     strokeWidth={innerStrokeWidth}
                     strokeLinecap="butt"
                 />
@@ -210,7 +304,7 @@ export default function DaliryReactRadialChart({
                 {valuePath && (
                     <path
                         d={valuePath}
-                        stroke={valueColor}
+                        stroke={valueStroke}
                         strokeWidth={innerStrokeWidth}
                         strokeLinecap="butt"
                     />
@@ -220,7 +314,7 @@ export default function DaliryReactRadialChart({
                     x={cx}
                     y={95 * scale}
                     textAnchor="middle"
-                    fill={valueColor}
+                    fill={isOverLimit ? (dangerGradientColors ? `url(#${dangerGradientId})` : dangerColor) : (gradientColors ? `url(#${valueGradientId})` : okColor)}
                     fontWeight="400"
                     fontFamily="inherit"
                     style={{
