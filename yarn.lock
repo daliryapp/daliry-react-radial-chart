@@ -223,6 +223,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"daliry-react-radial-chart@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "daliry-react-radial-chart@npm:1.0.1"
+  dependencies:
+    "@alwatr/nano-build": "npm:^5.5.0"
+    react: "npm:^18.3.1"
+    react-dom: "npm:^18.3.1"
+  peerDependencies:
+    react: ^18.3.1
+    react-dom: ^18.3.1
+  checksum: 10c0/937423296a7e9e42e664222fd3416b1d8cc5ac8a91cb84133e59c30e6b069f8658f8ade5606c5021bdcd77b88aff13480cd04c0bcfeb7848f7beaab9cd199b02
+  languageName: node
+  linkType: hard
+
 "daliry-react-radial-chart@workspace:.":
   version: 0.0.0-use.local
   resolution: "daliry-react-radial-chart@workspace:."
@@ -230,6 +244,7 @@ __metadata:
     "@alwatr/nano-build": "npm:^5.5.0"
     "@types/react": "npm:^19.0.10"
     "@types/react-dom": "npm:^19.0.4"
+    daliry-react-radial-chart: "npm:^1.0.1"
     esbuild: "npm:^0.25.1"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"

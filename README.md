@@ -30,7 +30,7 @@ If you're searching for a **React gauge component** with a clean **semicircle / 
 - Optional `maxValue` threshold support
 - Automatic danger state when `value > maxValue`
 - SVG-based and highly customizable
-- Great fit for dashboard cards and KPI widgets
+- **Advanced customization:** Support for custom angles and gradients
 
 ---
 
@@ -39,8 +39,8 @@ If you're searching for a **React gauge component** with a clean **semicircle / 
 - 📈 Animated semicircle gauge for React
 - 🎯 Optional `maxValue` threshold indicator
 - 🔴 Automatic danger color when value exceeds max
+- 🎨 **New:** Advanced styling with custom angles and gradients
 - 🧩 Lightweight and reusable component
-- 🎨 Fully customizable colors, size, and scale
 - ⚡ Built with SVG for precise rendering
 
 ---
@@ -50,10 +50,7 @@ If you're searching for a **React gauge component** with a clean **semicircle / 
 Install the package via npm or yarn:
 ```bash
 npm install daliry-react-radial-chart
-
-or
-
-bash
+# or
 yarn add daliry-react-radial-chart
 
 ---
@@ -67,7 +64,11 @@ import DaliryReactRadialChart from "daliry-react-radial-chart";
   value={26.2}
   maxValue={30}
   label="sentToPSP"
+  gradientColors={["#4facfe", "#00f2fe"]}
+  startAngle={-90}
+  endAngle={90}
 />
+
 ---
 
 ## 🎛 Props
@@ -81,45 +82,25 @@ import DaliryReactRadialChart from "daliry-react-radial-chart";
 | `dangerColor` | `string` | `#FF6077` | Color used when `value > maxValue` |
 | `trackColor` | `string` | `#2B3038` | Track/background arc color |
 | `cardBg` | `string` | `#1C2027` | Card background color |
+| `textColor` | `string` | `#FFFFFF` | Color of the central text |
 | `width` | `number` | `220` | Card width |
 | `height` | `number` | `180` | Card height |
 | `animationDuration` | `number` | `700` | Animation duration in ms |
 | `scale` | `number` | `1` | Scales the SVG gauge size |
+| `startAngle` | `number` | `-90` | Starting angle of the arc in degrees |
+| `endAngle` | `number` | `90` | Ending angle of the arc in degrees |
+| `gradientColors` | `[string, string]` | `undefined` | Tuple for custom gradient fill |
 
 ---
 
-## 🎨 Behavior
+## 🎨 Behavior & Customization
 
-- When `value <= maxValue`
-  - the main value arc uses `okColor`
-  - the center text uses `okColor`
-
-- When `value > maxValue`
-  - the main value arc switches to `dangerColor`
-  - the center text switches to `dangerColor`
-
-- When `maxValue` is provided
-  - an outer semicircle is rendered
-  - the safe range is shown before the threshold
-  - the danger range is shown after the threshold
-
----
-
-## 🧪 Notes
-
-- If `maxValue` is not provided, the outer threshold arc is not rendered
-- Value changes are animated smoothly using `requestAnimationFrame`
-- The component is SVG-based, so it scales cleanly across screen sizes
-
----
-
-## 🚀 Use Cases
-
-- Dashboard KPI widgets
-- Payment success/failure monitoring
-- Performance indicators
-- Threshold-based status cards
-- Admin panel analytics
+- **State Handling:**
+  - If `value <= maxValue`, the arc renders in `okColor` (or the `gradientColors` if provided).
+  - If `value > maxValue`, the arc automatically switches to `dangerColor` for visual emphasis.
+- **Advanced Styling:**
+  - Use `startAngle` and `endAngle` to control the curvature of the gauge. 
+  - Passing `gradientColors` will override the solid `okColor` for the value arc, creating a more modern look.
 
 ---
 
