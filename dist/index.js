@@ -23,7 +23,7 @@ function formatValue(value) {
   if (value < 10) return `${value.toFixed(2)}%`;
   return `${value.toFixed(1)}%`;
 }
-function StatusGaugeCard({
+function RadialChart({
   value = 0,
   maxValue,
   label = "success",
@@ -34,7 +34,8 @@ function StatusGaugeCard({
   width = 220,
   height = 180,
   animationDuration = 700,
-  scale = 1
+  scale = 1,
+  textColor = "#D8DCE3"
 }) {
   const [animatedValue, setAnimatedValue] = useState(clamp(value, 0, 100));
   const rafRef = useRef(null);
@@ -190,7 +191,7 @@ function StatusGaugeCard({
           "div",
           {
             style: {
-              color: "#D8DCE3",
+              color: textColor,
               fontSize: 12,
               fontWeight: 400,
               lineHeight: 1.2,
@@ -204,5 +205,5 @@ function StatusGaugeCard({
   );
 }
 export {
-  StatusGaugeCard as default
+  RadialChart as default
 };

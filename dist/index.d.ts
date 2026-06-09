@@ -11,6 +11,7 @@ type StatusGaugeCardProps = {
     height?: number;
     animationDuration?: number;
     scale?: number;
+    textColor?: string;
 };
-export default function StatusGaugeCard({ value, maxValue, label, okColor, dangerColor, trackColor, cardBg, width, height, animationDuration, scale }: StatusGaugeCardProps): React.JSX.Element;
+export default function RadialChart({ value, maxValue, label, okColor, dangerColor, trackColor, cardBg, width, height, animationDuration, scale, textColor, }: StatusGaugeCardProps): React.JSX.Element;
 export {};

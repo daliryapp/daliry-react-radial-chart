@@ -12,6 +12,7 @@ type StatusGaugeCardProps = {
     height?: number;
     animationDuration?: number;
     scale?: number;
+    textColor?: string;
 };
 
 function polarToCartesian(cx: number, cy: number, r: number, angle: number): { x: number; y: number } {
@@ -41,19 +42,20 @@ function formatValue(value: number): string {
     return `${value.toFixed(1)}%`;
 }
 
-export default function DaliryReactRadialChart({
-                                            value = 0,
-                                            maxValue,
-                                            label = "success",
-                                            okColor = "#79D56C",
-                                            dangerColor = "#FF6077",
-                                            trackColor = "#2B3038",
-                                            cardBg = "#1C2027",
-                                            width = 220,
-                                            height = 180,
-                                            animationDuration = 700,
-                                            scale = 1
-                                        }: StatusGaugeCardProps) {
+export default function RadialChart({
+                                        value = 0,
+                                        maxValue,
+                                        label = "success",
+                                        okColor = "#79D56C",
+                                        dangerColor = "#FF6077",
+                                        trackColor = "#2B3038",
+                                        cardBg = "#1C2027",
+                                        width = 220,
+                                        height = 180,
+                                        animationDuration = 700,
+                                        scale = 1,
+                                        textColor = "#D8DCE3",
+                                    }: StatusGaugeCardProps) {
     const [animatedValue, setAnimatedValue] = useState<number>(clamp(value, 0, 100));
     const rafRef = useRef<number | null>(null);
 
@@ -126,7 +128,7 @@ export default function DaliryReactRadialChart({
 
     const innerTrackPath = useMemo(
         () => describeArc(cx, cy, innerRadius, startAngle, endAngle),
-        [cx, cy, innerRadius]
+        [cx, cy, innerRadius],
     );
 
     const valuePath = useMemo(() => {
@@ -219,7 +221,7 @@ export default function DaliryReactRadialChart({
                     fontWeight="400"
                     fontFamily="inherit"
                     style={{
-                        fontSize: 18 * scale
+                        fontSize: 18 * scale,
                     }}
                 >
                     {formatValue(safeAnimatedValue)}
@@ -228,7 +230,7 @@ export default function DaliryReactRadialChart({
 
             <div
                 style={{
-                    color: "#D8DCE3",
+                    color: textColor,
                     fontSize: 12,
                     fontWeight: 400,
                     lineHeight: 1.2,
