@@ -7,9 +7,9 @@ esbuild
     bundle: true,
     minify: false,
     sourcemap: false,
-    format: "esm",  // یا "cjs" برای CommonJS
+    format: "esm",
     target: ["esnext"],
     // REMOVE this line
-    external: ["react", "react-dom"],  // این خط را حذف کن
+    external: ["react", "react-dom"],
   })
   .catch(() => process.exit(1));
