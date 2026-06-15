@@ -1,6 +1,10 @@
 {
   "name": "daliry-react-radial-chart",
-  "version": "1.0.4",
+  "version": "1.0.6",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daliryapp/daliry-react-radial-chart.git"
+  },
   "packageManager": "yarn@4.10.3",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -9,15 +13,11 @@
     "build": "node build.js && tsc"
   },
   "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
-  "dependencies": {
-    "@alwatr/nano-build": "^5.5.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "devDependencies": {
+    "@alwatr/nano-build": "^9.33.1",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "esbuild": "^0.25.1"
