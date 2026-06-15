@@ -18,6 +18,9 @@ It is perfect for **dashboards**, **KPI cards**, **status indicators**, and any 
 If you were thinking about donating, the best way to support me for now is to **follow me on GitHub** and **star this project**.  
 It really helps me keep building and improving open-source components.
 
+- **Follow me on GitHub**
+- **Star this repository**
+
 👉 [Follow me on GitHub](https://github.com/daliryapp)
 
 ---
