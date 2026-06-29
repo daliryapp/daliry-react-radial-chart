@@ -336,6 +336,7 @@ export default function DaliryReactRadialChart({
                     fontWeight: 400,
                     lineHeight: 1.2,
                     marginTop: -11,
+                    flex:1
                 }}
             >
                 {label}
