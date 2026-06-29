@@ -204,6 +204,7 @@ export default function DaliryReactRadialChart({
 
     return (
         <div
+            className={"daliry_radial_container"}
             style={{
                 width,
                 height,
@@ -213,11 +214,12 @@ export default function DaliryReactRadialChart({
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: "16px 12px 14px",
+                padding: "8px 4px 8px",
                 boxSizing: "border-box",
             }}
         >
             <svg
+                className={"daliry_radial_svg"}
                 width={svgWidth}
                 height={svgHeight}
                 viewBox={`0 0 ${svgWidth} ${svgHeight}`}
@@ -311,6 +313,7 @@ export default function DaliryReactRadialChart({
                 )}
 
                 <text
+                    className={"daliry_radial_text"}
                     x={cx}
                     y={95 * scale}
                     textAnchor="middle"
@@ -326,12 +329,13 @@ export default function DaliryReactRadialChart({
             </svg>
 
             <div
+                className={"daliry_radial_label"}
                 style={{
                     color: textColor,
                     fontSize: 12,
                     fontWeight: 400,
                     lineHeight: 1.2,
-                    marginTop: -4,
+                    marginTop: -11,
                 }}
             >
                 {label}
