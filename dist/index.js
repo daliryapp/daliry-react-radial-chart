@@ -140,5 +140,6 @@ export default function DaliryReactRadialChart({ value = 0, maxValue, label = "s
                     fontWeight: 400,
                     lineHeight: 1.2,
                     marginTop: -11,
+                    flex: 1
                 }, children: label })] }));
 }
