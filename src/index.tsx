@@ -19,6 +19,10 @@ type StatusGaugeCardProps = {
     dangerGradientColors?: GradientColors;
     trackGradientColors?: GradientColors;
     gradientDirection?: "horizontal" | "vertical" | "diagonal";
+    labelStyle?: React.CSSProperties;
+    textStyle?: React.CSSProperties;
+    svgStyle?: React.CSSProperties;
+    containerStyle?: React.CSSProperties;
 };
 
 function polarToCartesian(cx: number, cy: number, r: number, angle: number): { x: number; y: number } {
@@ -88,6 +92,10 @@ export default function DaliryReactRadialChart({
                                         dangerGradientColors,
                                         trackGradientColors,
                                         gradientDirection = "horizontal",
+                                                   labelStyle,
+                                                   textStyle,
+                                                   svgStyle,
+                                                   containerStyle
                                     }: StatusGaugeCardProps) {
     const gradientBaseId = useId().replace(/:/g, "");
     const valueGradientId = `${gradientBaseId}-value-gradient`;
@@ -204,7 +212,7 @@ export default function DaliryReactRadialChart({
 
     return (
         <div
-            className={"daliry_radial_container"}
+            className={`daliry_radial_container`}
             style={{
                 width,
                 height,
@@ -214,16 +222,19 @@ export default function DaliryReactRadialChart({
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: "8px 4px 8px",
                 boxSizing: "border-box",
+                ...containerStyle
             }}
         >
             <svg
-                className={"daliry_radial_svg"}
+                className={`daliry_radial_svg`}
                 width={svgWidth}
                 height={svgHeight}
                 viewBox={`0 0 ${svgWidth} ${svgHeight}`}
                 fill="none"
+                style={{
+                    ...svgStyle
+                }}
             >
                 <defs>
                     {gradientColors && (
@@ -313,7 +324,7 @@ export default function DaliryReactRadialChart({
                 )}
 
                 <text
-                    className={"daliry_radial_text"}
+                    className={`daliry_radial_text`}
                     x={cx}
                     y={95 * scale}
                     textAnchor="middle"
@@ -322,6 +333,7 @@ export default function DaliryReactRadialChart({
                     fontFamily="inherit"
                     style={{
                         fontSize: 18 * scale,
+                        ...textStyle
                     }}
                 >
                     {formatValue(safeAnimatedValue)}
@@ -329,14 +341,15 @@ export default function DaliryReactRadialChart({
             </svg>
 
             <div
-                className={"daliry_radial_label"}
+                className={`daliry_radial_label`}
                 style={{
                     color: textColor,
                     fontSize: 12,
                     fontWeight: 400,
                     lineHeight: 1.2,
                     marginTop: -11,
-                    flex:1
+                    flex:1,
+                    ...labelStyle
                 }}
             >
                 {label}
