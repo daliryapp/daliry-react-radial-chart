@@ -17,6 +17,10 @@ type StatusGaugeCardProps = {
     dangerGradientColors?: GradientColors;
     trackGradientColors?: GradientColors;
     gradientDirection?: "horizontal" | "vertical" | "diagonal";
+    labelStyle?: React.CSSProperties;
+    textStyle?: React.CSSProperties;
+    svgStyle?: React.CSSProperties;
+    containerStyle?: React.CSSProperties;
 };
 export default function DaliryReactRadialChart({ value, maxValue, label, okColor, dangerColor, trackColor, cardBg, width, height, animationDuration, scale, textColor, gradientColors, dangerGradientColors, trackGradientColors, gradientDirection, }: StatusGaugeCardProps): React.JSX.Element;
 export {};
