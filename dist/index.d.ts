@@ -22,6 +22,6 @@ type StatusGaugeCardProps = {
     svgStyle?: React.CSSProperties;
     containerStyle?: React.CSSProperties;
 };
-export default function DaliryReactRadialChart({ value, maxValue, label, okColor, dangerColor, trackColor, cardBg, width, height, animationDuration, scale, textColor, gradientColors, dangerGradientColors, trackGradientColors, gradientDirection, }: StatusGaugeCardProps): React.JSX.Element;
+export default function DaliryReactRadialChart({ value, maxValue, label, okColor, dangerColor, trackColor, cardBg, width, height, animationDuration, scale, textColor, gradientColors, dangerGradientColors, trackGradientColors, gradientDirection, labelStyle, textStyle, svgStyle, containerStyle }: StatusGaugeCardProps): React.JSX.Element;
 export {};
 //# sourceMappingURL=index.d.ts.map

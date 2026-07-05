@@ -39,7 +39,7 @@ function getGradientCoords(direction) {
             return { x1: "0%", y1: "0%", x2: "100%", y2: "0%" };
     }
 }
-export default function DaliryReactRadialChart({ value = 0, maxValue, label = "success", okColor = "#79D56C", dangerColor = "#FF6077", trackColor = "#2B3038", cardBg = "#1C2027", width = 220, height = 180, animationDuration = 700, scale = 1, textColor = "#D8DCE3", gradientColors, dangerGradientColors, trackGradientColors, gradientDirection = "horizontal", }) {
+export default function DaliryReactRadialChart({ value = 0, maxValue, label = "success", okColor = "#79D56C", dangerColor = "#FF6077", trackColor = "#2B3038", cardBg = "#1C2027", width = 220, height = 180, animationDuration = 700, scale = 1, textColor = "#D8DCE3", gradientColors, dangerGradientColors, trackGradientColors, gradientDirection = "horizontal", labelStyle, textStyle, svgStyle, containerStyle }) {
     const gradientBaseId = useId().replace(/:/g, "");
     const valueGradientId = `${gradientBaseId}-value-gradient`;
     const dangerGradientId = `${gradientBaseId}-danger-gradient`;
@@ -121,7 +121,7 @@ export default function DaliryReactRadialChart({ value = 0, maxValue, label = "s
     const outerDangerStroke = dangerGradientColors
         ? `url(#${dangerGradientId})`
         : dangerColor;
-    return (_jsxs("div", { className: "daliry_radial_container", style: {
+    return (_jsxs("div", { className: `daliry_radial_container`, style: {
             width,
             height,
             background: cardBg,
@@ -130,16 +130,20 @@ export default function DaliryReactRadialChart({ value = 0, maxValue, label = "s
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "8px 4px 8px",
             boxSizing: "border-box",
-        }, children: [_jsxs("svg", { className: "daliry_radial_svg", width: svgWidth, height: svgHeight, viewBox: `0 0 ${svgWidth} ${svgHeight}`, fill: "none", children: [_jsxs("defs", { children: [gradientColors && (_jsxs("linearGradient", { id: valueGradientId, x1: trackGradientCoords.x1, y1: trackGradientCoords.y1, x2: trackGradientCoords.x2, y2: trackGradientCoords.y2, children: [_jsx("stop", { offset: "0%", stopColor: gradientColors[0] }), _jsx("stop", { offset: "100%", stopColor: gradientColors[1] })] })), dangerGradientColors && (_jsxs("linearGradient", { id: dangerGradientId, x1: trackGradientCoords.x1, y1: trackGradientCoords.y1, x2: trackGradientCoords.x2, y2: trackGradientCoords.y2, children: [_jsx("stop", { offset: "0%", stopColor: dangerGradientColors[0] }), _jsx("stop", { offset: "100%", stopColor: dangerGradientColors[1] })] })), trackGradientColors && (_jsxs("linearGradient", { id: trackGradientId, x1: trackGradientCoords.x1, y1: trackGradientCoords.y1, x2: trackGradientCoords.x2, y2: trackGradientCoords.y2, children: [_jsx("stop", { offset: "0%", stopColor: trackGradientColors[0] }), _jsx("stop", { offset: "100%", stopColor: trackGradientColors[1] })] }))] }), safeMaxValue !== null && (_jsxs(_Fragment, { children: [_jsx("path", { d: describeArc(cx, cy, outerRadius, startAngle, endAngle), stroke: trackStroke, strokeWidth: outerStrokeWidth, strokeLinecap: "butt", opacity: "0.35" }), outerOkPath && (_jsx("path", { d: outerOkPath, stroke: outerOkStroke, strokeWidth: outerStrokeWidth, strokeLinecap: "butt" })), outerDangerPath && (_jsx("path", { d: outerDangerPath, stroke: outerDangerStroke, strokeWidth: outerStrokeWidth, strokeLinecap: "butt" }))] })), _jsx("path", { d: innerTrackPath, stroke: trackStroke, strokeWidth: innerStrokeWidth, strokeLinecap: "butt" }), valuePath && (_jsx("path", { d: valuePath, stroke: valueStroke, strokeWidth: innerStrokeWidth, strokeLinecap: "butt" })), _jsx("text", { className: "daliry_radial_text", x: cx, y: 95 * scale, textAnchor: "middle", fill: isOverLimit ? (dangerGradientColors ? `url(#${dangerGradientId})` : dangerColor) : (gradientColors ? `url(#${valueGradientId})` : okColor), fontWeight: "400", fontFamily: "inherit", style: {
+            ...containerStyle
+        }, children: [_jsxs("svg", { className: `daliry_radial_svg`, width: svgWidth, height: svgHeight, viewBox: `0 0 ${svgWidth} ${svgHeight}`, fill: "none", style: {
+                    ...svgStyle
+                }, children: [_jsxs("defs", { children: [gradientColors && (_jsxs("linearGradient", { id: valueGradientId, x1: trackGradientCoords.x1, y1: trackGradientCoords.y1, x2: trackGradientCoords.x2, y2: trackGradientCoords.y2, children: [_jsx("stop", { offset: "0%", stopColor: gradientColors[0] }), _jsx("stop", { offset: "100%", stopColor: gradientColors[1] })] })), dangerGradientColors && (_jsxs("linearGradient", { id: dangerGradientId, x1: trackGradientCoords.x1, y1: trackGradientCoords.y1, x2: trackGradientCoords.x2, y2: trackGradientCoords.y2, children: [_jsx("stop", { offset: "0%", stopColor: dangerGradientColors[0] }), _jsx("stop", { offset: "100%", stopColor: dangerGradientColors[1] })] })), trackGradientColors && (_jsxs("linearGradient", { id: trackGradientId, x1: trackGradientCoords.x1, y1: trackGradientCoords.y1, x2: trackGradientCoords.x2, y2: trackGradientCoords.y2, children: [_jsx("stop", { offset: "0%", stopColor: trackGradientColors[0] }), _jsx("stop", { offset: "100%", stopColor: trackGradientColors[1] })] }))] }), safeMaxValue !== null && (_jsxs(_Fragment, { children: [_jsx("path", { d: describeArc(cx, cy, outerRadius, startAngle, endAngle), stroke: trackStroke, strokeWidth: outerStrokeWidth, strokeLinecap: "butt", opacity: "0.35" }), outerOkPath && (_jsx("path", { d: outerOkPath, stroke: outerOkStroke, strokeWidth: outerStrokeWidth, strokeLinecap: "butt" })), outerDangerPath && (_jsx("path", { d: outerDangerPath, stroke: outerDangerStroke, strokeWidth: outerStrokeWidth, strokeLinecap: "butt" }))] })), _jsx("path", { d: innerTrackPath, stroke: trackStroke, strokeWidth: innerStrokeWidth, strokeLinecap: "butt" }), valuePath && (_jsx("path", { d: valuePath, stroke: valueStroke, strokeWidth: innerStrokeWidth, strokeLinecap: "butt" })), _jsx("text", { className: `daliry_radial_text`, x: cx, y: 95 * scale, textAnchor: "middle", fill: isOverLimit ? (dangerGradientColors ? `url(#${dangerGradientId})` : dangerColor) : (gradientColors ? `url(#${valueGradientId})` : okColor), fontWeight: "400", fontFamily: "inherit", style: {
                             fontSize: 18 * scale,
-                        }, children: formatValue(safeAnimatedValue) })] }), _jsx("div", { className: "daliry_radial_label", style: {
+                            ...textStyle
+                        }, children: formatValue(safeAnimatedValue) })] }), _jsx("div", { className: `daliry_radial_label`, style: {
                     color: textColor,
                     fontSize: 12,
                     fontWeight: 400,
                     lineHeight: 1.2,
                     marginTop: -11,
-                    flex: 1
+                    flex: 1,
+                    ...labelStyle
                 }, children: label })] }));
 }
